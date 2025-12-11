@@ -3,12 +3,13 @@ using UnityEngine.InputSystem;
 
 public class MouseManager : MonoBehaviour
 {
-    // need instantiator to make copies of the flower 
-    // need 
     public GameObject cube;
+    GameObject[] cubes;
+    public int cubeLimit = 10;
+    int numCubes = 0;
     void Start()
     {
-        
+        cubes = new GameObject[cubeLimit];
     }
 
     void Update()
@@ -22,32 +23,55 @@ public class MouseManager : MonoBehaviour
             Collider collider = hit.collider;
             GameObject gameObject = collider.gameObject;
             // look at name of gameobject, if gameobject name = background then 
-
+Debug.Log($"In MouseManager, name is [{gameObject.name}]");
             if (gameObject.name == "Background")
             {
-                GameObject cube = Instantiate(hit.collider.gameObject);
+                Debug.Log($"Making a clone of {hit.collider.gameObject.name}");
+                cubes[numCubes] = Instantiate(cube);
+            
+
+                Vector3 pos = hit.point;
+                Debug.Log("hit.point: " + hit.point);
+
+                pos.y = 1;
+
+                
+                // Instantiate(cube);
+                cubes[numCubes].transform.position = pos;
+                numCubes = numCubes + 1;
             }
+            
+        }
+        for (int i = 0; i < numCubes; ++i)
+        {
+            float r = Random.Range(0f,255f);
+            float g = Random.Range(0f,255f);
+            float b = Random.Range(0f,255f);
 
-            Vector3 pos = hit.point;
-            Debug.Log("hit.point: " + hit.point);
+            ColorSetter scn = cubes[numCubes].GetComponent<ColorSetter>();
+            scn.SetColor(r,g,b);
 
-            pos.y = 1;
+
+            // getcomponentsinchildren for cubes
+            // or add to interface?
+            
+            // trying to scale the cube so it disappears
+            // cubes[i].transform.localScale = new Vector3(1,1,1);
+            // if (cubes[i].transform.localScale.y > 0)
+            // {
+            //     cubes[i].transform.localScale = new Vector3(1,0,1);
+            //     Debug.Log ("aahhhahahah: " + cubes[i].transform.localScale);
+
+            //     if (cubes[i].transform.localScale.y < 0)
+            //     {
+            //         cubes[i].transform.localScale = new Vector3(0,0,0);
+            //     }
+            // }
+            
 
             
-            Instantiate(cube);
-            cube.transform.position = pos;
-            // cube.transform.rotate = ;
             
-            
-            
-            
-            
-            // Vector3 = hit.point;
-
-            // CreateShape nextSelected = gameObject.GetComponent<MaterialSetter>();
-            // want this to create a new cube on the inivsible plane
-            // need unity command for it to create a new gameobject/ instantiate
-            
+            // possibility for later: have each instance of the cube spin at different rates
         }
     }
 }
