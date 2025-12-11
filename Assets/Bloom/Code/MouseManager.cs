@@ -28,7 +28,8 @@ Debug.Log($"In MouseManager, name is [{gameObject.name}]");
             {
                 Debug.Log($"Making a clone of {hit.collider.gameObject.name}");
                 cubes[numCubes] = Instantiate(cube);
-            
+                ColorSetter cs = cubes[numCubes].GetComponent<ColorSetter>();
+                cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
 
                 Vector3 pos = hit.point;
                 Debug.Log("hit.point: " + hit.point);
@@ -39,17 +40,17 @@ Debug.Log($"In MouseManager, name is [{gameObject.name}]");
                 // Instantiate(cube);
                 cubes[numCubes].transform.position = pos;
                 numCubes = numCubes + 1;
-            }
+         
             
-        }
-        for (int i = 0; i < numCubes; ++i)
-        {
-            float r = Random.Range(0f,255f);
-            float g = Random.Range(0f,255f);
-            float b = Random.Range(0f,255f);
-
-            ColorSetter scn = cubes[numCubes].GetComponent<ColorSetter>();
-            scn.SetColor(r,g,b);
+            }
+        // for (int i = 0; i < numCubes; ++i)
+        // {
+        //     float r = Random.Range(0f,255f);
+        //     float g = Random.Range(0f,255f);
+        //     float b = Random.Range(0f,255f);
+        //     ColorSetter scn = cubes[i].GetComponent<ColorSetter>();
+            
+        //     scn.SetColor(r,g,b);
 
 
             // getcomponentsinchildren for cubes
