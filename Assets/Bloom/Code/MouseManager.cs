@@ -5,7 +5,7 @@ public class MouseManager : MonoBehaviour
 {
     public GameObject cube;
     GameObject[] cubes;
-    public int cubeLimit = 10;
+    public int cubeLimit = 50;
     int numCubes = 0;
     void Start()
     {
@@ -23,13 +23,18 @@ public class MouseManager : MonoBehaviour
             Collider collider = hit.collider;
             GameObject gameObject = collider.gameObject;
             // look at name of gameobject, if gameobject name = background then 
-Debug.Log($"In MouseManager, name is [{gameObject.name}]");
+            Debug.Log($"In MouseManager, name is [{gameObject.name}]");
             if (gameObject.name == "Background")
             {
                 Debug.Log($"Making a clone of {hit.collider.gameObject.name}");
                 cubes[numCubes] = Instantiate(cube);
                 ColorSetter cs = cubes[numCubes].GetComponent<ColorSetter>();
                 cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
+
+                // Spin spinCube = cubes[numCubes].GetComponent<Transform>();
+                // spinCube.SpinCube(0,Random.Range(0f,1f) * Time.deltaTime, 0);
+                // Spin spinCube = cubes[numCubes];
+                // spinCube.SpineCube(0, Random.Range(0f,360f) * Time.deltaTime,0);
 
                 Vector3 pos = hit.point;
                 Debug.Log("hit.point: " + hit.point);
@@ -74,5 +79,10 @@ Debug.Log($"In MouseManager, name is [{gameObject.name}]");
             
             // possibility for later: have each instance of the cube spin at different rates
         }
+        for (int i = 0; i < numCubes; i++)
+            {
+                cubes[i].transform.Rotate(0, Random.Range(0f,360f) * Time.deltaTime,0);
+                
+            }
     }
 }

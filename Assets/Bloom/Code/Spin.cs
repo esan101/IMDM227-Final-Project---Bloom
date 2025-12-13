@@ -7,10 +7,8 @@ public class Spin : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    public void SpinCube(float a, float b, float c)
     {
-        // GameObject.transform.Rotate(0, Random.Range(0f,360f) * Time.deltaTime,0);
+        // GetComponent<Transform>.transform.Rotate(a,b,c);
     }
 }
