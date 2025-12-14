@@ -95,10 +95,10 @@ public class flowerMouseManager : MonoBehaviour
             
             // possibility for later: have each instance of the cube spin at different rates
         }
-        for (int i = 0; i < numFlowers; i++)
-            {
-                flowers[i].transform.Rotate(0, Random.Range(0f,360f) * Time.deltaTime,0);
+        // for (int i = 0; i < numFlowers; i++)
+        //     {
+        //         flowers[i].transform.Rotate(0, Random.Range(0f,360f) * Time.deltaTime,0);
                 
-            }
+        //     }
     }
 }
