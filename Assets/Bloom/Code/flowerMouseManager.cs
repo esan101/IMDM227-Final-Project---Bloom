@@ -11,6 +11,8 @@ public class flowerMouseManager : MonoBehaviour
     //add music
     public AudioClip clickSound;
     AudioSource audioSource;
+    public ParticleSystem splash;
+
 
     void Start()
     {
@@ -39,6 +41,7 @@ public class flowerMouseManager : MonoBehaviour
                 flowers[numFlowers] = Instantiate(flower);
                 ColorSetter cs = flowers[numFlowers].GetComponent<ColorSetter>();
                 cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
+                
 
                 // Spin spinCube = cubes[numCubes].GetComponent<Transform>();
                 // spinCube.SpinCube(0,Random.Range(0f,1f) * Time.deltaTime, 0);
@@ -52,6 +55,10 @@ public class flowerMouseManager : MonoBehaviour
 
                 
                 // Instantiate(cube);
+                Quaternion rotation = Quaternion.Euler(0,0,0);
+                Instantiate(splash, pos, rotation);
+
+
                 flowers[numFlowers].transform.position = pos;
                 numFlowers = numFlowers + 1;
          
