@@ -82,7 +82,6 @@ public class MouseManager : MonoBehaviour
         for (int i = 0; i < numCubes; i++)
             {
                 cubes[i].transform.Rotate(0, Random.Range(0f,360f) * Time.deltaTime,0);
-                
             }
     }
 }
