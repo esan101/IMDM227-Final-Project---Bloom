@@ -7,9 +7,15 @@ public class flowerMouseManager : MonoBehaviour
     GameObject[] flowers;
     public int flowerLimit = 50;
     int numFlowers = 0;
+
+    //add music
+    public AudioClip clickSound;
+    AudioSource audioSource;
+
     void Start()
     {
         flowers = new GameObject[flowerLimit];
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -24,8 +30,11 @@ public class flowerMouseManager : MonoBehaviour
             GameObject gameObject = collider.gameObject;
             // look at name of gameobject, if gameobject name = background then 
             Debug.Log($"In MouseManager, name is [{gameObject.name}]");
+            
             if (gameObject.name == "Background")
             {
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.PlayOneShot(clickSound); //sound should play when user clicks on screen
                 Debug.Log($"Making a clone of {hit.collider.gameObject.name}");
                 flowers[numFlowers] = Instantiate(flower);
                 ColorSetter cs = flowers[numFlowers].GetComponent<ColorSetter>();
