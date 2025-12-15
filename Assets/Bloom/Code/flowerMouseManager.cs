@@ -63,16 +63,17 @@ public class flowerMouseManager : MonoBehaviour
 
                 Vector3 pos = hit.point;
                 Debug.Log("hit.point: " + hit.point);
-
                // pos.y = 1;
                 
                 // Instantiate(cube);
                 Quaternion rotation = Quaternion.Euler(0,0,0);
                 Instantiate(splash, pos, rotation);
 
-                flowers[numFlowers] = Instantiate(flowerParent, pos, Quaternion.identity); // moved from above Quaternion.identity
+                flowers[numFlowers] = Instantiate(flowerParent, pos, rotation); // moved from above Quaternion.identity
                 
-                flowers[numFlowers].transform.position = pos; //og
+                // flowers[numFlowers].transform.position = pos; //og
+
+                flowers[numFlowers].transform.Translate(pos.x - (0.1f)*Random.Range(0f,1f),pos.y,pos.z - (0.1f)*Random.Range(0f,1f));
 
                 flowers[numFlowers].SetActive(true);
 
