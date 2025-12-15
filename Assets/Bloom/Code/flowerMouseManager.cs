@@ -70,13 +70,13 @@ public class flowerMouseManager : MonoBehaviour
                 Quaternion rotation = Quaternion.Euler(0,0,0);
                 Instantiate(splash, pos, rotation);
 
-                flowers[numFlowers] = Instantiate(flowerParent, pos, Quaternion.identity); // moved from above Quaternion.identity
+                flowers[numFlowers] = Instantiate(flowerParent, pos, Quaternion.identity); 
                 
-                flowers[numFlowers].transform.position = pos; //og
+                flowers[numFlowers].transform.position = pos; 
 
                 flowers[numFlowers].SetActive(true);
 
-                ColorSetter cs = flowers[numFlowers].GetComponentInChildren<ColorSetter>(true); //added "true"
+                ColorSetter cs = flowers[numFlowers].GetComponentInChildren<ColorSetter>(true); 
                 cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
 
                 numFlowers = numFlowers + 1;
