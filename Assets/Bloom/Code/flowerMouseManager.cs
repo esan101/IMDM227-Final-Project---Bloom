@@ -69,7 +69,7 @@ public class flowerMouseManager : MonoBehaviour
                 
                 flowers[numFlowers].transform.position = pos; //og
 
-                //flowers[numFlowers].transform.Translate(pos.x - (0.1f)*Random.Range(0f,1f),pos.y,pos.z - (0.1f)*Random.Range(0f,1f));
+                flowers[numFlowers].transform.Translate(pos.x - Random.Range(0f,1f),pos.y,pos.z - Random.Range(0f,1f));
 
                 flowers[numFlowers].SetActive(true);
 
