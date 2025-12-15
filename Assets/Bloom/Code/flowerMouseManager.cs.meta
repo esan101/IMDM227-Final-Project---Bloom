@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: 49e200f5d2255db4282c9b5f43469a01
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - flower: {fileID: 919132149155446097, guid: 7c175390952c44340a19e36678f30207, type: 3}
+  - clickSound: {instanceID: 0}
+  - splash: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class flowerMouseManager : MonoBehaviour
 {
-    public GameObject flower;
+    public GameObject flowerParent; //changed it from flower to flowerParent
     GameObject[] flowers;
     public int flowerLimit = 50;
     int numFlowers = 0;
@@ -12,7 +12,7 @@ public class flowerMouseManager : MonoBehaviour
     public AudioClip clickSound;
     AudioSource audioSource;
     public ParticleSystem splash;
-
+    
 
     void Start()
     {
@@ -38,10 +38,23 @@ public class flowerMouseManager : MonoBehaviour
                 audioSource.pitch = Random.Range(0.8f, 1.2f);
                 audioSource.PlayOneShot(clickSound); //sound should play when user clicks on screen
                 Debug.Log($"Making a clone of {hit.collider.gameObject.name}");
-                flowers[numFlowers] = Instantiate(flower);
-                ColorSetter cs = flowers[numFlowers].GetComponent<ColorSetter>();
-                cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
-                
+                //flowers[numFlowers] = Instantiate(flower); //original
+                //flowers[numFlowers] = Instantiate(flower); //added
+                //flowers[numFlowers].SetActive(true); //added
+
+                //ColorSetter cs = flowers[numFlowers].GetComponent<ColorSetter>(); //og
+                //cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f)); //og
+
+                // flowers[numFlowers] = Instantiate(flower);
+
+                // set position BEFORE enabling
+                //flowers[numFlowers].transform.position = pos; //og
+
+                // now enable it
+                //flowers[numFlowers].SetActive(true);
+
+                //ColorSetter cs = flowers[numFlowers].GetComponent<ColorSetter>();
+                //cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
 
                 // Spin spinCube = cubes[numCubes].GetComponent<Transform>();
                 // spinCube.SpinCube(0,Random.Range(0f,1f) * Time.deltaTime, 0);
@@ -51,15 +64,21 @@ public class flowerMouseManager : MonoBehaviour
                 Vector3 pos = hit.point;
                 Debug.Log("hit.point: " + hit.point);
 
-                pos.y = 1;
-
+               // pos.y = 1;
                 
                 // Instantiate(cube);
                 Quaternion rotation = Quaternion.Euler(0,0,0);
                 Instantiate(splash, pos, rotation);
 
+                flowers[numFlowers] = Instantiate(flowerParent, pos, Quaternion.identity); // moved from above Quaternion.identity
+                
+                flowers[numFlowers].transform.position = pos; //og
 
-                flowers[numFlowers].transform.position = pos;
+                flowers[numFlowers].SetActive(true);
+
+                ColorSetter cs = flowers[numFlowers].GetComponentInChildren<ColorSetter>(true); //added "true"
+                cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
+
                 numFlowers = numFlowers + 1;
          
             
