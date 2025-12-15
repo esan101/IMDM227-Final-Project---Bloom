@@ -675,7 +675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::flowerMouseManager
   flowerParent: {fileID: 458100907}
   flowerLimit: 50
-  clickSound: {fileID: 8300000, guid: 86064962e77276245834907d0b754f53, type: 3}
+  clickSound: {fileID: 8300000, guid: 9b142622339471f418048d25bd51680a, type: 3}
   splash: {fileID: 2142182500}
   minY: -5
   maxY: 5
@@ -690,7 +690,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 86064962e77276245834907d0b754f53, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9b142622339471f418048d25bd51680a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -851,7 +851,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 86064962e77276245834907d0b754f53, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9b142622339471f418048d25bd51680a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
