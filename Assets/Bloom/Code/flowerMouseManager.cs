@@ -11,7 +11,7 @@ public class flowerMouseManager : MonoBehaviour
     //add music
     public AudioClip clickSound;
     AudioSource audioSource;
-    public ParticleSystem splash;
+    public ParticleSystem splash; // references particle system
     
 
     void Start()
@@ -30,48 +30,21 @@ public class flowerMouseManager : MonoBehaviour
         {
             Collider collider = hit.collider;
             GameObject gameObject = collider.gameObject;
-            // look at name of gameobject, if gameobject name = background then 
             Debug.Log($"In MouseManager, name is [{gameObject.name}]");
             
             if (gameObject.name == "Background")
             {
-                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.pitch = Random.Range(0.8f, 1.2f); // randomizes pitch
                 audioSource.PlayOneShot(clickSound); //sound should play when user clicks on screen
                 Debug.Log($"Making a clone of {hit.collider.gameObject.name}");
-                //flowers[numFlowers] = Instantiate(flower); //original
-                //flowers[numFlowers] = Instantiate(flower); //added
-                //flowers[numFlowers].SetActive(true); //added
 
-                //ColorSetter cs = flowers[numFlowers].GetComponent<ColorSetter>(); //og
-                //cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f)); //og
 
-                // flowers[numFlowers] = Instantiate(flower);
-
-                // set position BEFORE enabling
-                //flowers[numFlowers].transform.position = pos; //og
-
-                // now enable it
-                //flowers[numFlowers].SetActive(true);
-
-                //ColorSetter cs = flowers[numFlowers].GetComponent<ColorSetter>();
-                //cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
-
-                // Spin spinCube = cubes[numCubes].GetComponent<Transform>();
-                // spinCube.SpinCube(0,Random.Range(0f,1f) * Time.deltaTime, 0);
-                // Spin spinCube = cubes[numCubes];
-                // spinCube.SpineCube(0, Random.Range(0f,360f) * Time.deltaTime,0);
-
-                Vector3 pos = hit.point;
+                Vector3 pos = hit.point; // sets variable pos to be equal to where the mouse clicks on the plane
                 Debug.Log("hit.point: " + hit.point);
-               // pos.y = 1;
-                
-                // Instantiate(cube);
                 Quaternion rotation = Quaternion.Euler(0,0,0);
-                Instantiate(splash, pos, rotation);
+                Instantiate(splash, pos, rotation); // creates a copy of the particle system "splash" at hit position
 
                 flowers[numFlowers] = Instantiate(flowerParent, pos, rotation); // moved from above Quaternion.identity
-                
-                // flowers[numFlowers].transform.position = pos; //og
 
                 flowers[numFlowers].transform.Translate(pos.x - (0.1f)*Random.Range(0f,1f),pos.y,pos.z - (0.1f)*Random.Range(0f,1f));
 
@@ -84,41 +57,6 @@ public class flowerMouseManager : MonoBehaviour
          
             
             }
-        // for (int i = 0; i < numCubes; ++i)
-        // {
-        //     float r = Random.Range(0f,255f);
-        //     float g = Random.Range(0f,255f);
-        //     float b = Random.Range(0f,255f);
-        //     ColorSetter scn = cubes[i].GetComponent<ColorSetter>();
-            
-        //     scn.SetColor(r,g,b);
-
-
-            // getcomponentsinchildren for cubes
-            // or add to interface?
-            
-            // trying to scale the cube so it disappears
-            // cubes[i].transform.localScale = new Vector3(1,1,1);
-            // if (cubes[i].transform.localScale.y > 0)
-            // {
-            //     cubes[i].transform.localScale = new Vector3(1,0,1);
-            //     Debug.Log ("aahhhahahah: " + cubes[i].transform.localScale);
-
-            //     if (cubes[i].transform.localScale.y < 0)
-            //     {
-            //         cubes[i].transform.localScale = new Vector3(0,0,0);
-            //     }
-            // }
-            
-
-            
-            
-            // possibility for later: have each instance of the cube spin at different rates
         }
-        // for (int i = 0; i < numFlowers; i++)
-        //     {
-        //         flowers[i].transform.Rotate(0, Random.Range(0f,360f) * Time.deltaTime,0);
-                
-        //     }
     }
 }
