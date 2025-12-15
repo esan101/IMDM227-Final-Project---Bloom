@@ -11,7 +11,9 @@ public class flowerMouseManager : MonoBehaviour
     //add music
     public AudioClip clickSound;
     AudioSource audioSource;
-    public ParticleSystem splash; // references particle system
+    public ParticleSystem splash;
+    public float minY = -5f;  // bottom of background
+    public float maxY = 5f;   // top of background
     
 
     void Start()
@@ -34,8 +36,27 @@ public class flowerMouseManager : MonoBehaviour
             
             if (gameObject.name == "Background")
             {
-                audioSource.pitch = Random.Range(0.8f, 1.2f); // randomizes pitch
-                audioSource.PlayOneShot(clickSound); //sound should play when user clicks on screen
+                
+                float mouseY = hit.point.y;
+                float backgroundSize = Mathf.InverseLerp(minY, maxY, mouseY);
+
+                //if statement reads mouse's y coordinate. if y is on the lower end of screen, pitch is lower & vice versa
+                if (backgroundSize <= 0.33f) //if user clicks on 1/3 lower end of the screen
+                {
+                    audioSource.pitch = Random.Range(0.98f, 1.02f);
+                }
+                else if (backgroundSize <= 0.55f) //roughly the middle of the screen
+                {
+                    audioSource.pitch = Random.Range(1.23f, 1.27f);
+                }
+                else //if user clicks on the top end of the screen
+                {
+                    audioSource.pitch = Random.Range(1.48f, 1.52f);
+                }
+
+                audioSource.clip = clickSound;
+                audioSource.Play();
+                
                 Debug.Log($"Making a clone of {hit.collider.gameObject.name}");
 
 
@@ -45,12 +66,14 @@ public class flowerMouseManager : MonoBehaviour
                 Instantiate(splash, pos, rotation); // creates a copy of the particle system "splash" at hit position
 
                 flowers[numFlowers] = Instantiate(flowerParent, pos, rotation); // moved from above Quaternion.identity
+                
+                flowers[numFlowers].transform.position = pos; //og
 
-                flowers[numFlowers].transform.Translate(pos.x - (0.1f)*Random.Range(0f,1f),pos.y,pos.z - (0.1f)*Random.Range(0f,1f));
+                //flowers[numFlowers].transform.Translate(pos.x - (0.1f)*Random.Range(0f,1f),pos.y,pos.z - (0.1f)*Random.Range(0f,1f));
 
                 flowers[numFlowers].SetActive(true);
 
-                ColorSetter cs = flowers[numFlowers].GetComponentInChildren<ColorSetter>(true); //added "true"
+                ColorSetter cs = flowers[numFlowers].GetComponentInChildren<ColorSetter>(true); 
                 cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
 
                 numFlowers = numFlowers + 1;
