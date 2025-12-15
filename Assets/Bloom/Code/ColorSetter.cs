@@ -6,8 +6,8 @@ public class ColorSetter : MonoBehaviour
 
     public void SetColor(float r, float g, float b)
     {
-        Color cloneColor = new Color(r,g,b,1);
+        Color cloneColor = new Color(r,g,b,1); // takes individually randomized colors and applies them to each new instantiated flower
         
-        GetComponent<Renderer>().material.color = cloneColor;
+        GetComponent<Renderer>().material.color = cloneColor; // changes the color
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class flowerMouseManager : MonoBehaviour
 {
     public GameObject flowerParent; //changed it from flower to flowerParent
-    GameObject[] flowers;
-    public int flowerLimit = 50;
+    GameObject[] flowers; // array that stores flowers in the scene
+    public int flowerLimit = 50; // changable limit to flowers
     int numFlowers = 0;
 
     //add music
@@ -62,21 +62,20 @@ public class flowerMouseManager : MonoBehaviour
 
                 Vector3 pos = hit.point; // sets variable pos to be equal to where the mouse clicks on the plane
                 Debug.Log("hit.point: " + hit.point);
-                Quaternion rotation = Quaternion.Euler(0,0,0);
+                Quaternion rotation = Quaternion.Euler(0,0,0); // no rotation
                 Instantiate(splash, pos, rotation); // creates a copy of the particle system "splash" at hit position
 
                 flowers[numFlowers] = Instantiate(flowerParent, pos, rotation); // moved from above Quaternion.identity
-                
-                flowers[numFlowers].transform.position = pos; //og
 
-                flowers[numFlowers].transform.Translate(pos.x - Random.Range(0f,1f),pos.y,pos.z - Random.Range(0f,1f));
+                flowers[numFlowers].transform.Translate(pos.x - Random.Range(0f,1f),pos.y,pos.z - Random.Range(0f,1f)); // adds offset variation
 
                 flowers[numFlowers].SetActive(true);
 
                 ColorSetter cs = flowers[numFlowers].GetComponentInChildren<ColorSetter>(true); 
+                // random flower color: from 0 to 1, picks a random float for r,g,b that is sent into ColorSetter
                 cs.SetColor(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1f));
 
-                numFlowers = numFlowers + 1;
+                numFlowers = numFlowers + 1; // adds to array
          
             
             }
